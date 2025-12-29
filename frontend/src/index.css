@@ -1,0 +1,159 @@
+/* ============================= */
+/* 🌐 GLOBAL RESET & BASE */
+/* ============================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  background-color: #f8fafc; /* soft gray background */
+  color: #0f172a; /* slate text */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================= */
+/* 🧱 LAYOUT */
+/* ============================= */
+
+main {
+  min-height: 80vh;
+}
+
+/* ============================= */
+/* 🧭 NAVBAR */
+/* ============================= */
+
+.navbar {
+  padding: 0.75rem 1rem;
+}
+
+.navbar-brand {
+  letter-spacing: 0.3px;
+}
+
+.navbar .dropdown-toggle::after {
+  display: none;
+}
+
+/* ============================= */
+/* 🃏 CARDS */
+/* ============================= */
+
+.card {
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+}
+
+.card-header {
+  background: transparent;
+  border-bottom: 1px solid #e5e7eb;
+  font-weight: 600;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+/* ============================= */
+/* 🔘 BUTTONS */
+/* ============================= */
+
+.btn {
+  border-radius: 10px;
+  font-weight: 500;
+  padding: 0.5rem 1.2rem;
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
+}
+
+.btn-outline-primary {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.btn-outline-primary:hover {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+/* ============================= */
+/* 📝 FORMS */
+/* ============================= */
+
+.form-control {
+  border-radius: 10px;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #d1d5db;
+}
+
+.form-control:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* ============================= */
+/* 📋 TABLES (ADMIN) */
+/* ============================= */
+
+.table {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.table thead {
+  background-color: #f1f5f9;
+}
+
+.table th {
+  font-weight: 600;
+  color: #334155;
+  border-bottom: none;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+/* ============================= */
+/* 🔔 TOASTIFY */
+/* ============================= */
+
+.Toastify__toast {
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.Toastify__toast--success {
+  background: #16a34a;
+}
+
+.Toastify__toast--error {
+  background: #dc2626;
+}
+
+/* ============================= */
+/* 📱 RESPONSIVE */
+/* ============================= */
+
+@media (max-width: 768px) {
+  .card {
+    border-radius: 10px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
