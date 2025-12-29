@@ -4,63 +4,65 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
-dotenv.config();
+import cors from 'cors';
 
+dotenv.config();
 
 // ===================== Importing necessary files =====================
 import userRoutes from './routes/userRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import { notFoundErrorHandler, errorHandler } from './middlewares/errorMiddleware.js';
-
-
-// Server port configuration
-const PORT = process.env.PORT || 5000;
-
-// Express app configuration
-const app = express();
-
-// ===================== Database Configuration =====================
 import connectDB from './config/db.js';
 
+// ===================== App & Port =====================
+const PORT = process.env.PORT || 5000;
+const app = express();
+
+// ===================== Database =====================
 connectDB();
 
-// ===================== Setting Static Folder =====================
+// ===================== CORS CONFIG (🔥 MOST IMPORTANT PART) =====================
+app.use(
+  cors({
+    origin: [
+      'http://localhost:3000',
+      'https://assignment-ums.vercel.app',
+    ],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
+
+// Handle preflight requests
+app.options('*', cors());
+
+// ===================== Middleware =====================
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// ===================== Static Folder =====================
 app.use(express.static('backend/Public'));
 
-
-// ========================================== Middleware's ==========================================
-
-app.use(cookieParser()); // CookieParser Middleware
-
-app.use(express.json()); // Body parser Middleware from Express
-
-app.use(express.urlencoded({ extended: true })); // Form Data parser Middleware from Express
-
-
-
-//? ===================== Application Home Route =====================
-app.get('/', (req, res)=> {
-    
-    res.status(200).json(`${process.env.APPLICATION_NAME} Server and Systems are Up & Running.`);
-
+// ===================== Health Check =====================
+app.get('/', (req, res) => {
+  res.status(200).json(
+    `${process.env.APPLICATION_NAME} Server and Systems are Up & Running.`
+  );
 });
 
-
-//? ===================== Routes Configuration =====================
+// ===================== Routes =====================
 app.use('/api/users', userRoutes);
 app.use('/api/admin', adminRoutes);
 
-
-
-//? ===================== Error handler middleware configuration =====================
+// ===================== Error Handlers =====================
 app.use(notFoundErrorHandler);
 app.use(errorHandler);
 
-
-
-//NOTE ===================== Starting Server =====================
-app.listen(PORT, ()=> {
-
-    console.log(`${process.env.APPLICATION_NAME} SERVER is LIVE & Listening on PORT ${PORT}.........`);
-
-}); 
+// ===================== Start Server =====================
+app.listen(PORT, () => {
+  console.log(
+    `${process.env.APPLICATION_NAME} SERVER is LIVE & Listening on PORT ${PORT}`
+  );
+});
